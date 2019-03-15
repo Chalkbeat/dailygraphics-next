@@ -92,30 +92,6 @@
       aria-label="Embed code"
     ><%- await t.process(embedPath, { config, slug }) %></textarea>
 
-    <%
-    if (typeof COPY != "undefined") {
-    %>
-    <h2>Copyedit e-mail</h2>
-
-    <p>
-      Note: if you have a <var>metadata</var> tab in your sheets for this graphic, it will be used to fill in the blanks below.
-
-    <textarea
-      class="copyedit-email copy-on-click"
-      readonly="readonly"
-      rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
-      aria-label="Copyedit e-mail"
-    ><%= await t.process(copyeditPath, { COPY, config, slug, sheet }) %></textarea>
-    <% } %>
-
-    <h2>Direct link</h2>
-
-    Underneath the graphic embed, in the text of the story, add a prompt with a direct link to the graphic (without this preview frame, embed code, etc.). You can copy/paste the text below directly into Seamus (new editor) and the formatting should be preserved.
-
-    <blockquote class="direct-link">
-      <%= await t.process(directLinkPath, { config, slug }) %>
-    </blockquote>
-
   </section>
 
   <% if (!deployed) { %>
