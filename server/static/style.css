@@ -251,17 +251,23 @@ select {
 }
 
 .root-list .graphics-list {
-  max-width: 400px;
-  margin: 40px auto;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  list-style: none;
+}
+
+.root-list .graphics-list li {
+  width: 280px;
+  margin: 10px;
 }
 
 .root-list li .contents {
-  display: flex;
   justify-content: space-between;
   margin: 2px 0;
   padding: 2px;
   font-size: 18px;
-  border-bottom: 1px dashed var(--light-gray);
 }
 
 .root-list li.hide {
@@ -270,6 +276,19 @@ select {
 
 .root-list a {
   text-decoration: none;
+}
+
+.root-list .img-container {
+  width: 280px;
+  height: auto;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid var(--light-gray);
+}
+
+.root-list img {
+  max-width:100%;
+  height:auto;
 }
 
 .root-list .create.shade input[name="createSheet"]:checked + input[name="sheetID"] {
