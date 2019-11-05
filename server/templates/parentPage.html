@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
   <title><%= slug %></title>
   <link rel="shortcut icon" href="https://media.npr.org/favicon.ico">
   <% if (typeof stylesheet == "string") { %>
@@ -12,7 +13,7 @@
   <link rel="stylesheet" href="/style.css">
   <% } %>
 </head>
-<body class="preview-page <%= deployed ? "deployed" : "" %>">
+<body class="preview-page <%= deployed ? "deployed" : "local" %>">
   <header class="toolbar">
     <div class="title">
       <a class="back hide-deployed" aria-label="Back to graphic index" href="/">&laquo;</a>
@@ -43,7 +44,7 @@
     </button>
 
     <a target="_blank" class="prod-link button hide-deployed"
-      href="https://<%= config.s3.bucket %>/<%= config.s3.prefix %>/<%= slug %>/preview.html">
+      href="https://<%=  config.deployment.bucket %>/<%= config.deployment.prefix%>/<%= slug %>/preview.html">
       <div aria-hidden-="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-open_in_browser-24px.svg") %>
       </div>
@@ -69,15 +70,30 @@
   </header>
 
   <div class="copy shade">
-    <form method="POST" action="./duplicate">
+    <form method="POST" action="/graphic/<%= slug %>/duplicate">
       <label for="slug">Duplicate as:</label>
       <input id="slug" name="slug" required>
       <button class="submit">Duplicate</button>
     </form>
   </div>
 
-  <div class="preview-container" data-width="mobile">
-    <div data-pym-loader data-child-src="./index.html?<%= queryParams %>" id="preview">Loading...</div>
+
+  <div class="preview">
+
+    <% if (children) { %>
+    <div class="preview-select">
+      <select id="preview-select">
+        <% children.forEach(function(child) { %>
+        <option><%= child %></option>
+        <% }) %>
+      </select>
+    </div>
+    <% } %>
+
+    <div class="preview-container" data-width="mobile">
+      <div data-pym-loader data-child-src="./index.html" id="preview">Loading...</div>
+    </div>
+
   </div>
 
   <hr>
@@ -85,23 +101,60 @@
   <section class="metadata">
 
     <h2>Embed code</h2>
+    <% if (children) { %><h3>Default</h3><% } %>
     <textarea
       class="embed-code copy-on-click"
       readonly="readonly"
       rows="4"
       cols="80"
       aria-label="Embed code"
-    ><%- await t.process(embedPath, { config, slug }) %></textarea>
+    ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug })).trim().replace(/[\s\n]+/g, " ") %></textarea>
+    <%
+      if (children) for (var childPage of children.filter(c => c != "index.html")) { %>
+    <h3><%= childPage %></h3>
+    <textarea
+      class="embed-code copy-on-click"
+      readonly="readonly"
+      rows="4"
+      cols="80"
+      aria-label="Embed code"
+    ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage })).trim().replace(/[\s\n]+/g, " ") %></textarea>
+      <% } %>
+
+    <%
+    if (typeof COPY != "undefined") {
+    %>
+    <h2>Copyedit e-mail</h2>
+
+    <p>
+      Note: if you have a <var>metadata</var> tab in your sheets for this graphic, it will be used to fill in the blanks below.
+
+    <textarea
+      class="copyedit-email copy-on-click"
+      readonly="readonly"
+      rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
+      aria-label="Copyedit e-mail"
+    ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children }) %></textarea>
+    <% } %>
+
+    <h2>Direct link</h2>
+
+    Underneath the graphic embed, in the text of the story, add a prompt with a direct link to the graphic (without this preview frame, embed code, etc.). You can copy/paste the text below directly into Seamus (new editor) and the formatting should be preserved.
+
+    <blockquote class="direct-link">
+      <%= await t.process(`${config.templateRoot}/link.html`, { config, slug }) %>
+    </blockquote>
 
   </section>
 
   <% if (!deployed) { %>
   <script type="module" src="/parentPage.js"></script>
   <% } %>
-  <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
   <script>
 // this is here so that it still works on deployed pages
 var preview = document.querySelector(".preview-container");
+var embed = document.querySelector("#preview");
+var previewSelect = document.querySelector("#preview-select");
 var breakSelect = document.querySelector("select.breakpoint");
 
 breakSelect.addEventListener("change", function() {
@@ -116,6 +169,20 @@ if (window.location.hash) {
   breakSelect.value = w;
 }
 
+var here = new URL(window.location);
+var { search, searchParams } = here;
+var child = searchParams.get("preview") || "index.html";
+var childURL = `./${child}${search}`;
+embed.dataset.childSrc = childURL;
+previewSelect.value = child;
+
+previewSelect.addEventListener("change", function() {
+  var child = previewSelect.value;
+  var there = new URL(window.location);
+  there.searchParams.set("preview", child);
+  window.location.search = there.search;
+});
   </script>
+  <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
 </body>
 </html>

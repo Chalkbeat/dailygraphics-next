@@ -156,7 +156,7 @@ select {
 .toolbar button,
 .toolbar .button,
 .toolbar select {
-  margin: 0 4px 4px;
+  margin: 0 4px 0;
   font-size: 12px;
 }
 
@@ -313,17 +313,32 @@ select {
   color: red;
 }
 
+.preview-page .preview {
+  margin: 32px auto;
+}
+
+.preview-page .preview-select {
+  padding: 20px;
+}
+
+.preview-page .preview-select select {
+  margin: auto;
+  display: block;
+}
+
+
 .preview-page .preview-container {
   border: 2px dashed var(--light-gray);
-  margin: 32px auto;
   /* exception so we can add borders with impunity */
+  margin: auto;
   box-sizing: content-box;
   width: 100%;
 }
 
 .preview-page .preview-container[data-width="sidebar"] { width: 180px }
 .preview-page .preview-container[data-width="mobile"] { width: 360px }
-.preview-page .preview-container[data-width="desktop"] { width: 650px }
+.preview-page .preview-container[data-width="desktop"] { width: 730px }
+.preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
 
 .preview-page .metadata {
   max-width: 700px;
