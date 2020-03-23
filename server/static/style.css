@@ -281,9 +281,11 @@ select {
 .root-list .img-container {
   width: 280px;
   height: auto;
+  max-height: 240px;
   padding: 10px;
   background-color: #fff;
   border: 1px solid var(--light-gray);
+  overflow: hidden;
 }
 
 .root-list img {
