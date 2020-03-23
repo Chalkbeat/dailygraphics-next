@@ -1,5 +1,5 @@
 :root {
-  --off-black: #333;
+  --off-black: #393939;
   --lightest-gray: #ebebeb;
   --light-gray: #ddd;
   --middle-gray: #888;
@@ -122,7 +122,7 @@ select {
 /* components */
 
 .toolbar {
-  background: var(--lightest-gray);
+  background: var(--off-black);
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
@@ -136,6 +136,7 @@ select {
   font-weight: bold;
   margin: 0;
   display: inline;
+  color: var(--off-white);
 }
 
 .toolbar .title {
