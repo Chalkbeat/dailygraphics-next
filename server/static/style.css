@@ -3,9 +3,9 @@
   --lightest-gray: #ebebeb;
   --light-gray: #ddd;
   --middle-gray: #888;
-  --dark-gray: #666;
+  --dark-gray: #393939;
   --off-white: #f7f7f7;
-  --blue: #4774CC;
+  --blue: #178287;
   --local: green;
   --staging: orange;
   --production: red;
@@ -38,7 +38,7 @@ html, body {
 }
 
 a, a.visited {
-  color: var(--blue);
+  color: var(--dark-gray);
 }
 
 hr {
@@ -112,7 +112,9 @@ input {
 }
 
 select {
-  padding: 4px;
+  padding: 2px 12px;
+  border: 1px solid transparent;
+  border-radius: 4px;
   font-size: inherit;
   font-family: inherit;
   color: var(--blue);
@@ -247,12 +249,16 @@ select {
 
 /* home page */
 
+.content {
+  padding: 40px;
+}
+
 .root-list {
   background: var(--off-white);
 }
 
 .root-list .graphics-list {
-  margin: 20px;
+  padding: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
