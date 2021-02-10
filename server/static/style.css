@@ -38,7 +38,7 @@ html, body {
 }
 
 a, a.visited {
-  color: var(--dark-gray);
+  color: var(--blue);
 }
 
 hr {
