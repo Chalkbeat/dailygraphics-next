@@ -14,6 +14,24 @@ All the good stuff from the classic rig, plus:
 * Modern JS tooling, including Babel for new JS features and source maps for easier debugging
 * Improved Sheets integration, including typecasting for numerical/boolean values
 
+Table of contents
+-----------------
+
+  - `Quickstart`_
+  - `Getting started in more detail`_
+  - `Authorizing Google access`_
+  - `Creating a graphic`_
+  - `Preview graphic workspace`_
+  - `Sheets integration`_
+  - `Template creation`_
+  - `Deployment`_
+  - `Using the CLI`_
+  - `Synchronizing large files`_
+  - `Migrating from the original dailygraphics rig`_
+  - `Troubleshooting`_
+  - `Known issues`_
+
+
 Quickstart
 ----------
 
@@ -31,8 +49,8 @@ Once you've done that:
 4. You should now have three sibling folders: the rig, the templates and a graphics repo. Configure ``config.json`` in the rig folder so that the paths for the graphics and template folders match the folders from steps 2 and 3.
 5. Run ``npm start`` to begin running the server, and open ``localhost:8000`` in your browser to view the admin UI.
 
-Getting started (in more detail)
---------------------------------
+Getting started in more detail
+------------------------------
 
 Configuration for this project is split between ``config.json`` (an example of which is provided) for values that are organization-specific but not sensitive, and environment variables for values that should be confidential.
 
@@ -116,7 +134,20 @@ Errors detected during JS or LESS compilation will be routed to the dev tools co
 
 Each graphic should also have a ``manifest.json`` file in its folder, which is used to store configuration data for Sheets and deployment. The "sheets" key in that file tells the server which Google Sheet to use for loading labels and data. It will also have a snapshot of the Node modules installed when it was created--this isn't used for anything, but is meant as a helpful record when recreating graphics later.
 
-For most graphics, the Google Sheet workbook will contain a "labels" sheet (for headline and chatter text), a "metadata" sheet (which populates the copy edit e-mail on the preview page), and "data" (which actually generates the graphics). However, the rig will download any sheet it finds, unless the name starts with an underscore, like "_scratch". You can use this to hide large working sheets from the rig, preventing them from slowing down the initial preview page with data that's not directly relevant to the graphic itself.
+Sheets integration
+------------------
+
+For most graphics, the Google Sheet workbook will contain a "labels" sheet (for headline and chatter text), a "metadata" sheet (which populates the copy edit e-mail on the preview page), and "data" (which actually generates the graphics). However, the rig will download any sheet it finds, unless the name starts with an underscore, like "_scratch". You can use this to hide large working sheets from the rig, preventing them from slowing down the initial preview page with data that's not directly relevant to the graphic itself. Likewise, columns that start with an underscore are ignored.
+
+One useful data structure tip: If a Google Sheet has a "key" header, it will be exposed to the template as a key/value store, with each row assigned to the respective key. If it has "key" and "value" columns, the value column will be assigned to the lookup directly, and other columns will be ignored. This can be seen in action in the "labels" sheet. Absent these headers, the data will be an array with each item being each row.
+
+By default, the rig automatically casts values from strings to native JS types (`true`/`false` and numbers) if possible. However, you can also manually specify a type annotation via the column name if you want to force a specific value type. To do so, set your column as `key:type` with one of the following type strings:
+
+* Strings: "text" or "string"
+* Numbers: "numeric", "float", or "number" (you can also use "int" to round the value)
+* Booleans: "bool" or "boolean" (synonyms like "true", "false", "yes", "no", or empty cells are all recognized)
+
+For example, to make sure that a "rankings" column is treated as a string of comma-separated numbers and not a single numerical value, you can rename it to "rankings:text".
 
 Template creation
 -----------------
