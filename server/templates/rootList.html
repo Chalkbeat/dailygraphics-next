@@ -26,24 +26,25 @@
         <option value="network|net">Network</option>
         <option value="">All</option>
       </select>
+
     </header>
 
-    <div class="content">
+    <div class="create shade">
+      <form method="POST" action="/graphic">
+        <select id="template" name="template">
+          <% templates.forEach(t => { %>
+          <option value="<%= t %>"><%= t.replace(/(_|^)(\w)/g, (_, p, s) => " " + s.toUpperCase()) %></option>
+          <% }) %>
+        </select>
+        <input type="text" required name="slug">
+        <label for="createSheet">Create Sheet</label>
+        <input type="checkbox" name="createSheet" id="createSheet" checked="checked">
+        <input type="text" name="sheetID" placeholder="Existing Sheet ID">
+        <button type="submit">Create</button>
+      </form>
+    </div>
 
-      <div class="create shade">
-        <form method="POST" action="/graphic">
-          <select id="template" name="template">
-            <% templates.forEach(t => { %>
-            <option value="<%= t %>"><%= t.replace(/(_|^)(\w)/g, (_, p, s) => " " + s.toUpperCase()) %></option>
-            <% }) %>
-          </select>
-          <input type="text" required name="slug">
-          <label for="createSheet">Create Sheet</label>
-          <input type="checkbox" name="createSheet" id="createSheet" checked="checked">
-          <input type="text" name="sheetID" placeholder="Existing Sheet ID">
-          <button type="submit">Create</button>
-        </form>
-      </div>
+    <div class="content">
 
       <ol class="graphics-list">
       <% graphics.forEach(function(g) { %>
