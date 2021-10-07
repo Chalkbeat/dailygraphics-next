@@ -5,7 +5,8 @@
   "driveFolder": "1Uyjx0glIOx3vqJmmxIjvFXEPjMR0WV0J",
   "s3": {
     "bucket": "chalkbeatgraphics",
-    "prefix": "dailygraphics"
+    "prefix": "dailygraphics",
+    "url": "s3.amazonaws.com/chalkbeatgraphics/dailygraphics/"
   },
   // this is the NPR Visuals Google Analytics property. update to use your own.
   "analyticsID": ""
