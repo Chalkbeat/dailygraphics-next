@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<%
+  var deployBase = config.deployment.url ?
+    `https://${config.deployment.url}` :
+    `https://${config.deployment.bucket}/${config.deployment.prefix}/`;
+%>
 <html>
 <head>
   <meta charset="utf-8">
@@ -44,7 +49,7 @@
     </button>
 
     <a target="_blank" class="prod-link button hide-deployed"
-      href="<%= config.argv.target ? "http" : "https" %>://<%=  config.deployment.bucket %>/<%= config.deployment.prefix%>/<%= slug %>/preview.html">
+      href="<%= new URL(slug + "/preview.html", deployBase) %>">
       <div aria-hidden-="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-open_in_browser-24px.svg") %>
       </div>
