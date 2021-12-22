@@ -149,6 +149,11 @@ By default, the rig automatically casts values from strings to native JS types (
 
 For example, to make sure that a "rankings" column is treated as a string of comma-separated numbers and not a single numerical value, you can rename it to "rankings:text".
 
+Docs integration
+----------------
+
+A *secret feature* of the rig is that you can also load a Google Doc for your graphic, which can be useful for the rare text-heavy interactive. To do so, add a ``"doc"`` key to the manifest for a graphic. In your template, you'll now have access to a ``TEXT`` object with two keys: ``TEXT.raw`` will give you the direct text from the doc, and ``TEXT.parsed`` will be the ArchieML object (if it was able to be parsed). Links and some Docs formatting (bold, italics, underlines) will automatically be converted to HTML during the download process.
+
 Template creation
 -----------------
 
