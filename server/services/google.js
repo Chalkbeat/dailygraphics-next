@@ -12,11 +12,9 @@ module.exports = function(app) {
       getSheet: async function(sheet, options = {}) {
         var cached = null;
         if (!options.force) {
-          var cached = sheetCache.get(sheet);
+          var cached = sheetCache.getCloned(sheet);
           if (cached) {
             console.log(`Using cached copy for sheet ${sheet}`);
-            // make a fresh copy, so that refreshes don't mess with the data
-            cached = JSON.parse(JSON.stringify(cached));
           }
         }
         var found = cached || (await getSheet(sheet));
@@ -26,11 +24,9 @@ module.exports = function(app) {
       getDoc: async function(doc, options = {}) {
         var cached = null;
         if (!options.force) {
-          var cached = docCache.get(doc);
+          var cached = docCache.getCloned(doc);
           if (cached) {
             console.log(`Using cached copy for doc ${doc}`);
-            // make a fresh copy, so that refreshes don't mess with the data
-            cached = JSON.parse(JSON.stringify(cached));
           }
         }
         var found = cached || (await getDoc(doc));
