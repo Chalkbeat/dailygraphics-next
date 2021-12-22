@@ -29,5 +29,6 @@ module.exports = function(app) {
   };
 
   // test on individual graphics
+  app.use("/$", check);
   app.use("/graphic/:slug/$", check);
 };
