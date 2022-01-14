@@ -26,6 +26,7 @@
     "chokidar": "^3.4.2",
     "chrome-launcher": "^0.13.4",
     "common-shakeify": "^0.5.2",
+    "commonmark": "^0.30.0",
     "exorcist": "^1.0.1",
     "express": "^4.16.4",
     "googleapis": "^71.0.0",
