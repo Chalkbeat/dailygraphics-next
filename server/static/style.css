@@ -1,11 +1,11 @@
 :root {
-  --off-black: #393939;
+  --off-black: #333;
   --lightest-gray: #ebebeb;
   --light-gray: #ddd;
   --middle-gray: #888;
-  --dark-gray: #393939;
+  --dark-gray: #666;
   --off-white: #f7f7f7;
-  --blue: #178287;
+  --blue: #4774CC;
   --local: green;
   --staging: orange;
   --production: red;
@@ -119,9 +119,7 @@ input {
 }
 
 select {
-  padding: 2px 12px;
-  border: 1px solid transparent;
-  border-radius: 4px;
+  padding: 4px;
   font-size: inherit;
   font-family: inherit;
   color: var(--blue);
@@ -131,7 +129,7 @@ select {
 /* components */
 
 .toolbar {
-  background: var(--off-black);
+  background: var(--lightest-gray);
   padding: 8px 16px;
   display: flex;
   justify-content: space-between;
@@ -145,7 +143,6 @@ select {
   font-weight: bold;
   margin: 0;
   display: inline;
-  color: var(--off-white);
 }
 
 .toolbar .title {
@@ -216,10 +213,10 @@ select {
 
 .shade {
   text-align: right;
-  background: var(--blue);
+  background: var(--dark-gray);
   color: var(--off-white);
   padding: 16px;
-  /* margin-bottom: 32px; */
+  margin-bottom: 32px;
   box-shadow: 0 16px 8px rgba(0, 0, 0, .2);
   display: none;
   font-size: 16px;
@@ -228,7 +225,6 @@ select {
 .shade.show {
   animation: slide-down 800ms;
   display: block;
-  width: 100%;
 }
 
 .shade form {
@@ -257,32 +253,22 @@ select {
 
 /* home page */
 
-.content {
-  padding: 40px;
-}
-
 .root-list {
   background: var(--off-white);
 }
 
 .root-list .graphics-list {
-  padding: 0;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  list-style: none;
-}
-
-.root-list .graphics-list li {
-  width: 280px;
-  margin: 10px;
+  max-width: 400px;
+  margin: 40px auto;
 }
 
 .root-list li .contents {
+  display: flex;
   justify-content: space-between;
   margin: 2px 0;
   padding: 2px;
   font-size: 18px;
+  border-bottom: 1px dashed var(--light-gray);
 }
 
 .root-list li.hide {
@@ -291,21 +277,6 @@ select {
 
 .root-list a {
   text-decoration: none;
-}
-
-.root-list .img-container {
-  width: 280px;
-  height: auto;
-  max-height: 240px;
-  padding: 10px;
-  background-color: #fff;
-  border: 1px solid var(--light-gray);
-  overflow: hidden;
-}
-
-.root-list img {
-  max-width:100%;
-  height:auto;
 }
 
 .root-list .create.shade input[name="createSheet"]:checked + input[name="sheetID"] {
@@ -354,11 +325,11 @@ select {
 
 .preview-page .preview-container[data-width="sidebar"] { width: 180px }
 .preview-page .preview-container[data-width="mobile"] { width: 360px }
-.preview-page .preview-container[data-width="desktop"] { width: 740px }
+.preview-page .preview-container[data-width="desktop"] { width: 730px }
 .preview-page .preview-container[data-width="fluid"] { border-width: 2px 0; }
 
 .preview-page .metadata {
-  max-width: 740px;
+  max-width: 700px;
   margin: auto;
   padding: 16px;
 }

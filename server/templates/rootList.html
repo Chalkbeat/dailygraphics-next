@@ -7,28 +7,12 @@
     <title>Daily Graphics</title>
   </head>
   <body class="root-list">
-
+    
     <header class="toolbar">
-      <h1 class="title">Chalkbeat Daily Graphics</h1>
+      <h1 class="title">daily.graphics</h1>
       <button class="new-graphic">new()</button>
       <input type="search" placeholder="Search list" class="search-graphics"/>
-      <select name="group" class="filter-by-bureau">
-        <option value="example|example" selected>Select bureau</option>
-        <option value="chicago|chi">Chicago</option>
-        <option value="colorado|co">Colorado</option>
-        <option value="detroit|det">Detroit</option>
-        <option value="indiana|in">Indiana</option>
-        <option value="new-york|ny">New York</option>
-        <option value="newark|nwk">Newark</option>
-        <option value="philadelphia|phi">Philadelphia</option>
-        <option value="tennessee|tn">Tennessee</option>
-        <option value="national|nat">National</option>
-        <option value="network|net">Network</option>
-        <option value="">All</option>
-      </select>
-
     </header>
-
     <div class="create shade">
       <form method="POST" action="/graphic">
         <select id="template" name="template">
@@ -43,23 +27,15 @@
         <button type="submit">Create</button>
       </form>
     </div>
-
-    <div class="content">
-
-      <ol class="graphics-list">
-      <% graphics.forEach(function(g) { %>
-        <a href="/graphic/<%= g %>/" class="examples">
-          <li data-slug="<%= g %>" class="item">
-            <div class="contents">
-              <p><%= g %></p>
-              <div class="img-container"><img src="/graphic/<%= g %>/fallback.png"></div>
-            </div>
-          </li>
-        </a>
-      <% }); %>
-      </ol>
-
-    </div>
+    
+    <ol class="graphics-list">
+    <% for (var g of graphics) { %>
+      <li data-slug="<%= g %>" class="item">
+        <div class="contents">
+          <a href="/graphic/<%= g %>/"><%= g %></a>
+        </div>
+    <% } %>
+    </ol>
 
     <script type="module" src="rootPage.js"></script>
   </body>

@@ -2,11 +2,9 @@ import { showToast } from "./toast.js";
 import { $ } from "./qsa.js";
 
 var searchInput = $.one(".search-graphics");
-var bureauInput = $.one(".filter-by-bureau");
 var graphicItems = $(".graphics-list .item");
 
 var filterGraphics = function() {
-  bureauInput.value = "";
   var value = searchInput.value;
   var re = new RegExp(value);
   graphicItems.forEach(li => {
@@ -16,17 +14,7 @@ var filterGraphics = function() {
 };
 
 searchInput.addEventListener("keyup", filterGraphics);
-
-var filterGraphicsByBureau = function() {
-  var value = bureauInput.value.split("|");
-  graphicItems.forEach(li => {
-    var { slug } = li.dataset;
-    li.classList.toggle("hide", !slug.startsWith(value[0]) & !slug.startsWith(value[1]));
-  });
-};
-
-bureauInput.addEventListener("change", filterGraphicsByBureau);
-filterGraphicsByBureau();
+filterGraphics();
 
 var createShade = $.one(".create.shade");
 var toggleCreate = $.one(".new-graphic");
