@@ -32,6 +32,7 @@ module.exports = async function(request, response, next) {
   var data = {
     slug,
     sheet,
+    doc,
     config,
     children,
     deployed: false
