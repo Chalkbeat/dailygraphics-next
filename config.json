@@ -4,9 +4,15 @@
   // leave driveFolder blank to create new sheets in the same folder as their templates
   "driveFolder": "1Uyjx0glIOx3vqJmmxIjvFXEPjMR0WV0J",
   "s3": {
-    "bucket": "chalkbeatgraphics",
-    "prefix": "dailygraphics",
-    "url": "s3.amazonaws.com/chalkbeatgraphics/dailygraphics/"
+    "stage": {
+      "bucket": "test.chalkbeat.org",
+      "prefix": "dailygraphics"
+    },
+    "live": {
+      "bucket": "chalkbeatgraphics",
+      "prefix": "dailygraphics",
+      "url": "s3.amazonaws.com/chalkbeatgraphics/dailygraphics/"
+    }
   },
   // this is the NPR Visuals Google Analytics property. update to use your own.
   "analyticsID": ""
