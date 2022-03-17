@@ -35,7 +35,7 @@ module.exports = async function(request, response) {
   var file = path.join(config.root, slug, basename);
   var output = "";
   try {
-    output = await processHTML(file, data);
+    output = await processHTML(file, data, { console: consoles });
   } catch (err) {
     consoles.error(`Error in ${err.filename}: ${err.message}`);
     output = "";
