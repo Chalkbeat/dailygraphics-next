@@ -2,17 +2,19 @@
   "graphicsPath": "../graphics-js",
   "templatePath": "../dailygraphics-templates",
   // leave driveFolder blank to create new sheets in the same folder as their templates
-  "driveFolder": "0B2rSjDbnpA5XTThSNDZkWlJTX1E",
+  "driveFolder": "1Uyjx0glIOx3vqJmmxIjvFXEPjMR0WV0J",
   "s3": {
-    "live": {
-      "bucket": "apps.npr.org",
-      "prefix": "dailygraphics/graphics"
-    },
     "stage": {
-      "bucket": "stage-apps.npr.org",
-      "prefix": "dailygraphics/graphics"
+      "bucket": "test.chalkbeat.org",
+      "prefix": "dailygraphics"
+    },
+    "live": {
+      "bucket": "chalkbeatgraphics",
+      "prefix": "dailygraphics",
+      "url": "s3.amazonaws.com/chalkbeatgraphics/dailygraphics/"
     }
   },
   // this is the NPR Visuals Google Analytics property. update to use your own.
-  "analyticsID": "UA-5828686-75"
+  "analyticsID": "",
+  "capture": false
 }
