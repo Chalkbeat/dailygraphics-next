@@ -11,3 +11,6 @@ module.exports = async function(config, argv, slugs) {
     }
   }
 };
+
+module.exports.command = "deploy SLUGS";
+module.exports.description = "deploy the chosen graphics to S3";
