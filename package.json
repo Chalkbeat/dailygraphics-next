@@ -24,7 +24,7 @@
     "caniuse-lite": "^1.0.30001171",
     "chalk": "^2.4.2",
     "chokidar": "^3.4.2",
-    "chrome-launcher": "^0.13.4",
+    "chrome-launcher": "^0.15.1",
     "commonmark": "^0.30.0",
     "express": "^4.16.4",
     "googleapis": "^71.0.0",
