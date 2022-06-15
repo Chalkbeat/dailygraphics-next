@@ -116,7 +116,7 @@
 
   <section class="metadata">
 
-        <h2>Embed code</h2>
+    <h2>Embed code</h2>
     <% if (children) { %><h3>Default</h3><% } %>
     <textarea
       class="embed-code copy-on-click"
@@ -135,6 +135,22 @@
       cols="80"
       aria-label="Embed code"
     ><%- (await t.process(`${config.templateRoot}/embed.html`, { config, slug, childPage })).trim().replace(/[\s\n]+/g, " ") %></textarea>
+      <% } %>
+
+      <%
+      if (typeof COPY != "undefined" && COPY.labels && COPY.metadata) {
+      %>
+      <h2>Copyedit e-mail</h2>
+
+      <p>
+        Note: if you have a <var>metadata</var> tab in your sheets for this graphic, it will be used to fill in the blanks below.
+
+      <textarea
+        class="copyedit-email copy-on-click"
+        readonly="readonly"
+        rows="<%= 16 + Object.keys(COPY.labels).length * 3 %>"
+        aria-label="Copyedit e-mail"
+      ><%= await t.process(`${config.templateRoot}/copyedit.html`, { COPY, config, slug, sheet, children, deployBase }) %></textarea>
       <% } %>
 
   </section>
