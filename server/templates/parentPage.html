@@ -107,7 +107,7 @@
     <% } %>
 
     <div class="preview-container" data-width="mobile">
-      <div data-pym-loader data-child-src="./index.html" id="preview">Loading...</div>
+      <side-chain src="./index.html" id="preview">Loading...</side-chain>
     </div>
 
   </div>
@@ -183,6 +183,7 @@ if (previewSelect) {
   var child = searchParams.get("preview") || "index.html";
   var childURL = `./${child}${search}`;
   embed.dataset.childSrc = childURL;
+  embed.setAttribute("src", childURL);
   previewSelect.value = child;
 
   previewSelect.addEventListener("change", function() {
@@ -193,6 +194,6 @@ if (previewSelect) {
   });
 }
   </script>
-  <script src="https://pym.nprapps.org/npr-pym-loader.v2.min.js"></script>
+  <script src="https://apps.npr.org/sidechain/loader.js"></script>
 </body>
 </html>
