@@ -194,6 +194,10 @@ if (previewSelect) {
   });
 }
   </script>
+  <% if (deployed) { %>
+  <script src="https://apps.npr.org/sidechain/loader.js"></script>
+  <% } else { %>
   <script type="module" src="/node_modules/@nprapps/sidechain/src/index.js"></script>
+  <% } %>
 </body>
 </html>
