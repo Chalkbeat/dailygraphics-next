@@ -26,6 +26,7 @@
     "chokidar": "^3.4.2",
     "chrome-launcher": "^0.15.1",
     "commonmark": "^0.30.0",
+    "csv-parse": "^5.3.0",
     "express": "^4.16.4",
     "googleapis": "^71.0.0",
     "less": "^3.8.1",
