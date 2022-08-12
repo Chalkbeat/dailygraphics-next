@@ -12,5 +12,5 @@ var command = async function(config, argv, [s]) {
 
 module.exports = command;
 
-module.exports.command = "load SLUG";
+module.exports.command = "csv SLUG";
 module.exports.description = "read CSV files from a folder with the matching SLUG";

@@ -63,6 +63,11 @@ module.exports = function(app) {
     }, 600);
   };
 
+  var cacheAlias = {
+    csv: "html",
+    jsx: "js"
+  };
+
   var paused = false;
   var onChange = function(file) {
     if (paused) return;
@@ -70,7 +75,7 @@ module.exports = function(app) {
     // todo - should we filter for specific extensions?
     // evict the cache
     var ext = path.extname(file).slice(1);
-    var cache = app.get("cache").partition(ext);
+    var cache = app.get("cache").partition(cacheAlias[ext] || ext);
     cache.clear();
     // tell clients about the reload (this is debounced)
     sendRefresh(file);

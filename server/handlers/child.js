@@ -2,6 +2,7 @@ var fs = require("fs").promises;
 var path = require("path");
 var processHTML = require("../../lib/processHTML");
 var readJSON = require("../../lib/readJSON");
+var loadCSV = require("../../lib/loadCSV");
 
 module.exports = async function(request, response) {
   var app = request.app;
@@ -20,7 +21,8 @@ module.exports = async function(request, response) {
     slug,
     config,
     COPY: {},
-    TEXT: {}
+    TEXT: {},
+    CSV: await loadCSV(config, slug)
   };
 
   if (sheet) {
