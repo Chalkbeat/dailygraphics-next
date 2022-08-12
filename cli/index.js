@@ -24,7 +24,7 @@ var commands = {
   copyedit: require("./copyedit"),
   sync: require("./sync"),
   "try": require("./try"),
-  loadCSV: require("./loadCSV")
+  csv: require("./csv")
 };
 
 var run = async function() {
