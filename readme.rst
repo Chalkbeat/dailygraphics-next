@@ -88,6 +88,7 @@ The server supports a number of command-line arguments to customize its behavior
 * ``--disable-headless`` - Show the Chrome window when capturing fallback images, which can help on some computers
 * ``--target`` - Choose between "stage" and "live" (default of "live") for deployment to S3
 * ``--deployTo`` - Override the ``deployTo`` config.json option (see [Deployment](#deployment), below)
+* ``--offline`` - Disables the authorization check against Google. Graphics that have Sheets or Docs listed in their manifest will still request those, but the server will not require a constant connection, and it should be possible to work completely offline for graphics that only rely on CSV.
 
 Due to the way NPM scripts work, flags must be passed after a ``--`` separator. For example, running the rig on port 7777 would look like ``npm start -- --port 7777``.
 
@@ -153,6 +154,13 @@ Docs integration
 ----------------
 
 A *secret feature* of the rig is that you can also load a Google Doc for your graphic, which can be useful for the rare text-heavy interactive. To do so, add a ``"doc"`` key to the manifest for a graphic. In your template, you'll now have access to a ``TEXT`` object with two keys: ``TEXT.raw`` will give you the direct text from the doc, and ``TEXT.parsed`` will be the ArchieML object (if it was able to be parsed). Links and some Docs formatting (bold, italics, underlines) will automatically be converted to HTML during the download process.
+
+CSV integration
+---------------
+
+If you want to load local data, either for working offline or because you don't want to roundtrip data through Sheets, you can pull from CSV files in the graphic directory. Add a ``"csv"`` property to the manifest, with either a relative path string to a single file or an array of path strings. These will be exposed to templating as ``CSV``, with properties for each file. For example, if your manifest contains ``"csv": ["names.csv", "synced/states.csv"]``, you'll be able to access these via ``CSV.names`` and ``CSV.states`` in your EJS templates.
+
+Like Sheets, types will be cast for you, and CSV files with a "key" column will be converted to an object instead of an array. Unlike Sheets, column names are not used to force type conversion--it's done on a per-value basis only.
 
 Template creation
 -----------------
