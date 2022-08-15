@@ -75,8 +75,11 @@ module.exports = function(app) {
     // todo - should we filter for specific extensions?
     // evict the cache
     var ext = path.extname(file).slice(1);
-    var cache = app.get("cache").partition(cacheAlias[ext] || ext);
-    cache.clear();
+    ext = cacheAlias[ext] || ext;
+    var cache = app.get("cache")
+    if (cache.hasPartition(ext)) {
+      cache.partition(ext).clear();
+    }
     // tell clients about the reload (this is debounced)
     sendRefresh(file);
   };
