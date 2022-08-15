@@ -23,8 +23,7 @@ var commands = {
   copy: require("./copy"),
   copyedit: require("./copyedit"),
   sync: require("./sync"),
-  "try": require("./try"),
-  csv: require("./csv")
+  "try": require("./try")
 };
 
 var run = async function() {
