@@ -8,6 +8,7 @@ module.exports = async function(request, response) {
   var config = app.get("config");
 
   var { getSheet, getDoc } = app.get("google").drive;
+  var { loadCSV } = app.get("csv");
   var consoles = app.get("browserConsole");
 
   var { slug } = request.params;
@@ -20,7 +21,8 @@ module.exports = async function(request, response) {
     slug,
     config,
     COPY: {},
-    TEXT: {}
+    TEXT: {},
+    CSV: await loadCSV(slug)
   };
 
   if (sheet) {
@@ -37,8 +39,8 @@ module.exports = async function(request, response) {
   try {
     output = await processHTML(file, data, { console: consoles });
   } catch (err) {
-    consoles.error(`Error in ${err.filename}: ${err.message}`);
-    output = "";
+    consoles.error(`EJS error at ${err.filename || basename}:${err.line}\n${err.message}`);
+    output = `<h3>Error at ${err.filename || basename}:${err.line}</h3><pre style="white-space: pre-wrap">${err.message}</pre>`;
   }
   if (!(config.argv.liveReload === false)) {
     output += `<script src="http://localhost:${config.argv.liveReload || 35729}/livereload.js"></script>`;
