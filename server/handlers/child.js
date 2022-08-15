@@ -2,13 +2,13 @@ var fs = require("fs").promises;
 var path = require("path");
 var processHTML = require("../../lib/processHTML");
 var readJSON = require("../../lib/readJSON");
-var loadCSV = require("../../lib/loadCSV");
 
 module.exports = async function(request, response) {
   var app = request.app;
   var config = app.get("config");
 
   var { getSheet, getDoc } = app.get("google").drive;
+  var { loadCSV } = app.get("csv");
   var consoles = app.get("browserConsole");
 
   var { slug } = request.params;
@@ -22,7 +22,7 @@ module.exports = async function(request, response) {
     config,
     COPY: {},
     TEXT: {},
-    CSV: await loadCSV(config, slug)
+    CSV: await loadCSV(slug)
   };
 
   if (sheet) {

@@ -63,11 +63,6 @@ module.exports = function(app) {
     }, 600);
   };
 
-  var cacheAlias = {
-    csv: "html",
-    jsx: "js"
-  };
-
   var paused = false;
   var onChange = function(file) {
     if (paused) return;
@@ -75,7 +70,6 @@ module.exports = function(app) {
     // todo - should we filter for specific extensions?
     // evict the cache
     var ext = path.extname(file).slice(1);
-    ext = cacheAlias[ext] || ext;
     var cache = app.get("cache")
     if (cache.hasPartition(ext)) {
       cache.partition(ext).clear();
