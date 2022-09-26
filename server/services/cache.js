@@ -33,7 +33,8 @@ class MemoryPalace {
   // this helps with running multiple templating processes during deploy
   // as it prevents them from mutating each others' data
   getCloned(key) {
-    return clone(this.data[key]);
+    var value = this.data[key];
+    return value ? clone(this.data[key]) : null;
   }
 
   set(key, value) {
