@@ -27,7 +27,8 @@ module.exports = async function(request, response, next) {
   var { sheet, doc } = manifest;
 
   var htmlFiles = await expand(path.join(config.root, slug), ".", ["*.html", "!_*.html"]);
-  var children = htmlFiles.length > 1 ? htmlFiles.map(f => f.relative) : false;
+  var nonIndex = htmlFiles.map(f => f.relative).filter(f => f != "index.html");
+  var children = ["index.html", ...nonIndex];
 
   var data = {
     slug,
