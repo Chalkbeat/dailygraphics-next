@@ -175,12 +175,16 @@ if (previewSelect) {
     var child = previewSelect.value;
     var there = new URL(window.location);
     there.searchParams.set("preview", child);
-    window.location.search = there.search;
+    window.history.replaceState({}, false, there.toString());
+    var { search, searchParams } = there;
+    var child = searchParams.get("preview") || "index.html";
+    var childURL = `./${child}${search}`;
+    embed.setAttribute("src", childURL);
   });
 }
   </script>
   <% if (deployed) { %>
-  <script src="https://apps.npr.org/sidechain/loader.js"></script>
+  <script src="https://projects.chalkbeat.org/sidechain/loader.js"></script>
   <% } else { %>
   <script type="module" src="/node_modules/@nprapps/sidechain/src/index.js"></script>
   <% } %>
