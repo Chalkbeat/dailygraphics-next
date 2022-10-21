@@ -162,6 +162,13 @@ if (window.location.hash) {
   breakSelect.value = w;
 }
 
+// add search params to the embed for testing
+if (window.location.search) {
+  var src = embed.getAttribute("src");
+  src += window.location.search;
+  embed.setAttribute("src", src);
+}
+
 if (previewSelect) {
   var here = new URL(window.location);
   var { search, searchParams } = here;
