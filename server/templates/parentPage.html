@@ -32,7 +32,7 @@
       <option value="fluid">Fluid</option>
     </select>
 
-    <% if (typeof sheet != "undefined") { %>
+    <% if (typeof sheet != "undefined" && sheet) { %>
     <a target="_blank" class="edit-sheet button" href="https://docs.google.com/spreadsheets/d/<%= sheet %>/edit#gid=0">
       <div aria-hidden="true" class="inline-svg">
         <%= await t.includeStatic("../static/icons/baseline-folder_shared-24px.svg") %>
@@ -41,7 +41,7 @@
     </a>
     <% } %>
 
-    <% if (typeof doc != "undefined") { %>
+    <% if (typeof doc != "undefined" && doc) { %>
       <a target="_blank" class="edit-doc button" href="https://docs.google.com/document/d/<%= doc %>/edit#gid=0">
         <div aria-hidden="true" class="inline-svg">
           <%= await t.includeStatic("../static/icons/baseline-folder_shared-24px.svg") %>

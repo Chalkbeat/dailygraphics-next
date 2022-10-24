@@ -24,7 +24,7 @@ module.exports = async function(request, response, next) {
   } catch (err) {
     return response.status(500).send(`Error: Unable to read manifest.json for ${slug}`);
   }
-  var { sheet, doc } = manifest;
+  var { sheet = false, doc = false} = manifest;
 
   var htmlFiles = await expand(path.join(config.root, slug), ".", ["*.html", "!_*.html"]);
   var nonIndex = htmlFiles.map(f => f.relative).filter(f => f != "index.html");
@@ -36,7 +36,9 @@ module.exports = async function(request, response, next) {
     doc,
     config,
     children,
-    deployed: false
+    deployed: false,
+    COPY: {},
+    TEXT: {}
   };
 
   if (sheet) {

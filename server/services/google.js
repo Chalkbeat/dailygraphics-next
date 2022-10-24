@@ -19,7 +19,7 @@ module.exports = function(app) {
         }
         var found = cached || (await getSheet(sheet));
         if (!cached) sheetCache.set(sheet, found);
-        return found;
+        return found || {};
       },
       getDoc: async function(doc, options = {}) {
         var cached = null;
@@ -31,7 +31,7 @@ module.exports = function(app) {
         }
         var found = cached || (await getDoc(doc));
         if (!cached) docCache.set(doc, found);
-        return found;
+        return found || {};
       }
     },
     auth: require("../../lib/googleAuth")
