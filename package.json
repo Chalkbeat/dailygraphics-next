@@ -38,6 +38,7 @@
     "nodemon": "^2.0.7",
     "puppeteer-core": "^14.3.0",
     "rollup": "^2.70.1",
+    "rollup-plugin-terser": "^7.0.2",
     "typogr": "^0.6.8",
     "ws": "^6.1.2"
   }
