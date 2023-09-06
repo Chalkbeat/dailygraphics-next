@@ -24,6 +24,7 @@ module.exports = function(app) {
     // console.log("Livereload client connected");
 
     socket.on("message", function(message) {
+      if (message instanceof Buffer) message = message.toString("utf-8");
       if (typeof message == "string") message = JSON.parse(message);
       switch (message.command) {
         case "hello":
