@@ -77,7 +77,7 @@ button, .button {
 
   &[aria-pressed="true"] {
     background: var(--blue);
-    color: var(--off-white); 
+    color: var(--off-white);
   }
 
   .tooltip {
@@ -99,7 +99,7 @@ button, .button {
   text-align: center;
   fill: currentColor;
 
-  svg {
+  & svg {
     display: block;
     margin: auto;
   }
@@ -217,27 +217,24 @@ select {
     display: block;
   }
 
-  form {
+  & form {
     display: flex;
     justify-content: flex-end;
     align-items: center;
   }
 
-  label {
+  & label {
     font-size: 14px;
     font-weight: normal;
     margin-right: 0;
     text-style: italic;
   }
 
-  label,
-  input,
-  select,
-  button {
+  & label, & input, & select, & button {
     margin: 0 8px;
   }
 
-  label + input[type="checkbox"] {
+  & label + input[type="checkbox"] {
     margin-left: 0;
   }
 }
@@ -350,11 +347,11 @@ select {
     padding: 20px;
     margin: 20px 0;
 
-    &.a {
+    & a {
       font-style: italic;
       font-weight: bold;
       text-decoration: none;
-      font-size: 14px;   
+      font-size: 14px;
     }
   }
 
