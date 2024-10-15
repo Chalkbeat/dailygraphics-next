@@ -40,7 +40,7 @@ To run this project, you'll need Node 10.0 or higher installed. On OS X and Linu
 Once you've done that:
 
 1. Clone this repo, and run ``npm i`` to install its dependencies.
-2. Clone the `templates repo <https://github.com/nprapps/dailygraphics-templates>`_ to install a selection of premade graphic types.
+2. Clone the `templates repo <https://github.com/chalkbeat/dailygraphics-templates>`_ to install a selection of premade graphic types.
 3. Clone or create a folder to contain your actual graphic files (by default this is ``graphics-js``, in the same parent folder where you put the rig and template repos).
 
    a. If you're at NPR, we have a private ``graphics-js`` repo already created--you should clone that repo and run ``npm install`` in that folder to get our current dependencies.
@@ -59,7 +59,7 @@ We recognize that environment variables are not perfectly secure (since installe
 * GOOGLE_OAUTH_CLIENT_ID
 * GOOGLE_OAUTH_CONSUMER_SECRET
 
-The Google OAuth variables should match the client ID and secret for an API app that can access your account. `This post <http://blog.apps.npr.org/2015/03/02/app-template-oauth.html>`_ has details on setting that up.
+The Google OAuth variables should match the client ID and secret for an API app that can access your account. `This post <http://blog.apps.npr.org/2015/03/02/app-template-oauth.html>`_ has details on setting that up. Note that while the post only mentions the Drive API, this version of the rig requires you to enable API access for Drive, Sheets, and Docs.
 
 Alternatively, `service account authentication <https://developers.google.com/identity/protocols/OAuth2ServiceAccount>`_ is also supported. To create a service account and JSON key file, visit your project's `GCP web console <https://console.cloud.google.com/iam-admin/serviceaccounts>`_ to get started.
 
@@ -74,7 +74,7 @@ If you're deploying to S3, which is the default for the rig, you'll also need to
 * AWS_SECRET_ACCESS_KEY
 * AWS_DEFAULT_REGION
 
-In addition to the directory that contains this app, you'll also need two other directories. One is for the templates that are used to create each graphic (in the legacy rig, these were stored in the ``dailygraphics/graphic_templates`` folder). We provide a repo of templates used at NPR `here <https://github.com/nprapps/dailygraphics-templates>`_, and you should feel free to clone it. In the ``config.json file``, the "templateRoot" value should be the path to this folder.
+In addition to the directory that contains this app, you'll also need two other directories. One is for the templates that are used to create each graphic (in the legacy rig, these were stored in the ``dailygraphics/graphic_templates`` folder). We provide a repo of templates used at Chalkbeat `here <https://github.com/chalkbeat/dailygraphics-templates>`_, and you should feel free to clone it. In the ``config.json file``, the "templateRoot" value should be the path to this folder.
 
 The other directory is for your graphics themselves, and it should be referenced with the "graphicsPath" key of your ``config.json`` file. This folder is also where you should install any libraries used by your graphics via NPM. For example, if you're using our templates, you'll want to run ``npm install d3-array d3-axis d3-scale d3-selection`` to get the most common D3 packages.
 
@@ -169,7 +169,7 @@ For the most part, templates are just folders containing files that should be co
 
 You will also need to add a "templateSheet" key to your ``manifest.json`` in the template folder (for existing graphics, you can often just rename the "sheet" key). When the template is instantiated, the server will duplicate that Sheet into a new copy and add the resulting ID to the manifest for the graphic. Graphics retain the original "templateSheet" key in their manifest when instantiated from a template.
 
-For more details on templates, visit the `templates repo <https://github.com/nprapps/dailygraphics-templates>`_.
+For more details on templates, visit the `templates repo <https://github.com/chalkbeat/dailygraphics-templates>`_.
 
 Deployment
 ----------
