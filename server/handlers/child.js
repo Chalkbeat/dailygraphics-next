@@ -34,10 +34,20 @@ module.exports = async function(request, response) {
   }
 
   var basename = request.params[0] + ".html";
-  var file = path.join(config.root, slug, basename);
+  var filename = basename;
+  // check for aliases
+  if (manifest.alias) {
+    for (var k in manifest.alias) {
+      var aliases = manifest.alias[k];
+      if (aliases.includes(basename)) {
+        filename = k;
+      }
+    }
+  }
+  var file = path.join(config.root, slug, filename);
   var output = "";
   try {
-    output = await processHTML(file, data, { console: consoles });
+    output = await processHTML(file, data, { console: consoles, basename });
   } catch (err) {
     consoles.error(`EJS error at ${err.filename || basename}:${err.line}\n${err.message}`);
     output = `<h3>Error at ${err.filename || basename}:${err.line}</h3><pre style="white-space: pre-wrap">${err.message}</pre>`;

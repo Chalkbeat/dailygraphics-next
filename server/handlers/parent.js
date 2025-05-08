@@ -29,6 +29,10 @@ module.exports = async function(request, response, next) {
   var htmlFiles = await expand(path.join(config.root, slug), ".", ["*.html", "!_*.html"]);
   var nonIndex = htmlFiles.map(f => f.relative).filter(f => f != "index.html");
   var children = ["index.html", ...nonIndex];
+  if (manifest.alias) {
+    var aliased = Object.keys(manifest.alias).flatMap(k => manifest.alias[k]);
+    children.push(...aliased);
+  }
 
   var data = {
     slug,
