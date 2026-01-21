@@ -22,7 +22,6 @@
     "@rollup/plugin-commonjs": "^25.0.5",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "body-parser": "^1.18.3",
-    "chalk": "^2.4.2",
     "chokidar": "^3.4.2",
     "chrome-launcher": "^1.0.0",
     "commonmark": "^0.30.0",
@@ -31,15 +30,12 @@
     "googleapis": "^146.0.0",
     "less": "^4.2.0",
     "lodash.escape": "^4.0.1",
-    "lodash.template": "^4.4.0",
     "mime": "^3.0.0",
     "minimatch": "^9.0.3",
-    "minimist": "^1.2.0",
     "nodemon": "^3.0.1",
     "puppeteer-core": "^22.10.0",
     "rollup": "^4.0.2",
     "typogr": "^0.6.8",
-    "whatwg-url": "^14.0.0",
     "ws": "^8.14.0"
   },
   "overrides": {
